@@ -1,0 +1,221 @@
+/*A reset, applies to everything automatically*/
+/*
+*{
+	margin:0px;
+	padding:0px;
+}
+*/
+body{
+	background-color: #f4f4f4;
+	color: #555555;
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:16px;
+	font-weight:normal;
+
+	/*same as above*/
+	font:normal 16px Arial, Helvetica,sans-serif;
+
+	line-height:1.6em;
+	margin:0;
+}
+
+a{
+	text-decoration: none;
+	color:#000;
+}
+
+a:hover{
+	color:red;
+}
+
+a:active{
+	color:green;
+}
+
+a:visited{
+}
+
+
+.container{
+	width:95%;
+	margin:auto;
+}
+
+.clr{
+	clear:both;
+}
+
+.button{
+	background-color: #333;
+	color:#fff;
+	padding:10px 15px;
+	border:none;
+}
+
+.button:hover{
+	background-color:green;
+	color:#fff;
+}
+
+
+.box-1{
+	background-color:#333;
+	color:#fff;
+
+	/*size,color,style*/
+	border-right:5px red solid;
+	border-left:5px red solid;
+	border-top:5px red solid;
+	border-bottom: 5px red solid;
+
+	/*same as above*/
+	border:5px red solid;
+
+	/*individual properties*/
+	border-width:3px;
+	border-bottom-width:10px;
+	border-top-style:dotted;
+
+	/*overwrites previous properties*/
+	border:5px red solid;
+
+	padding:20px;  /*TRBL */
+	margin:20px 0; /*TB, LR*/
+}
+
+.box-1 h4{
+	font-family:Tahoma;
+	font-weight:1200;
+	font-style:italic;
+	text-decoration:underline;
+	text-transform: uppercase;
+	letter-spacing: 0.2em;
+	word-spacing: 1em;
+
+}
+
+.box-2{
+	border:3px dotted #ccc;
+	padding:20px;
+	margin:20px 0;
+}
+
+.categories{
+	border:1px #ccc solid;
+	padding:10px;
+	border-radius:15px;
+}
+
+.categories h4{
+	text-align: center;
+}
+
+.categories ul{
+	padding-left:20px;
+	list-style:square;
+}
+
+.categories li{
+	padding-bottom:6px;
+	border-bottom:dotted 1px #333;
+	list-style-image: url('../img/tick.jpg');
+}
+
+.my-form{
+	padding:20px;
+	border:3px #ccc dotted;
+	width:25%;
+}
+
+.my-form .form-group{
+	padding-bottom: 5px;
+}
+
+.my-form label{
+	display:block; /*forces block level element putting label on a new line! */
+}
+
+.my-form input[type="text"], input[type="email"], input[type="number"], input[type="date"], .my-form textarea, .my-form select{
+	padding:8px;
+	width:90%;
+}
+
+.block{
+	float:left;
+	width:33.3%;
+	border:1px solid #ccc;
+	padding:10px;
+	box-sizing:border-box; /* keeps everything on same line (flexbox good for this stuff) */
+}
+
+#main-block{
+	float:left;
+	width:70%;
+	border:1px solid #ccc;
+	padding:15px;
+	box-sizing: border-box;
+
+}
+
+#sidebar{
+	float:right;
+	width:30%;
+	background-color: #333;
+	color:white;
+	padding:15px;
+	box-sizing: border-box;
+}
+
+.p-box{
+	width:800px;
+	height:500px;
+	border:1px solid #000;
+	margin-top:30px;
+	position:relative; /*important if we want to position elements within this aboslute */
+	background-image:url('../img/backimage.jpg');
+	background-repeat:no-repeat;
+	background-position:center center;
+
+}
+/*absolute positioning*/
+.p-box h1{
+	position:absolute; /*great for moving things around in games etc*/
+	top:100px;
+	left:200px;
+}
+
+.p-box h2{
+	position:absolute;
+	bottom:40px;
+	right:100px;
+
+}
+
+/*fixed positioning*/
+.fix-me{
+	position:fixed;
+	bottom:40px;
+	right:40px;
+}
+
+/*pseduo classes*/
+.my-list li:first-child{
+	background:red; /*can set to color or image here*/
+
+}
+
+.my-list li:last-child{
+	background:blue;
+}
+
+.my-list li:nth-child(5){
+	background:yellow;
+}
+
+.my-list li:nth-child(even){
+	background:grey;
+}
+
+
+
