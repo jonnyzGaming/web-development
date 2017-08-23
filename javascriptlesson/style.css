@@ -1,0 +1,21 @@
+body{
+	text-align: center;
+	font-family: normal 18px Arial
+}
+
+li{
+	list-style: none;
+	line-height: 2em;
+	text-align: left;
+}
+
+#main-header{
+	background:#f4f4f4;
+	padding:20px;
+	border-bottom:#ccc 3px solid;
+}
+
+.container{
+	width:700px;
+	margin:30px auto;
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Learning Javascript</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<!-- <script type="text/javascript" src="main.js"></script> EXTERNAL LINK -->
+
+</head>
+<body onload="showDate()" id="body">
+
+<header id="main-header">
+	<h1 id="heading">Learning Javascript</h1>
+	<p>Waow</p>
+</header>
+
+
+<!-- for output -->
+<div class="container">
+	<button onmouseover="showDate()" onmouseout="clearDate()">Show Date</button>
+	<h1 id="time"></h1>
+</div>
+
+<br>
+
+<!-- A form -->
+<div class="container">
+	<form method="post" action="something.php" name="myForm" onsubmit="return validateForm()">
+	<div>
+		<label>First Name</label>
+		<input type="text" name="firstName" id="firstName">
+	</div>
+	<br>
+	<div>
+		<label>Last Name</label>
+		<input type="text" name="lastName" id="lastName">
+	</div>
+	<br>
+	<div>
+		<label>Background</label>
+		<select name="background" id="background" onchange="changeBackground(this)">
+			<option value="red">Red</option>
+			<option value="blue">Blue</option>
+			<option value="green">Green</option>
+		</select>
+	</div>
+	<br>
+	<input type="submit" name="submitButton" value="Submit">
+	</form>
+</div>
+
+
+
+<script type="text/javascript">
+	
+	//best way to define objects(supports multiple)
+	function Fruit(name ,color, shape){
+		this.name = name;
+		this.color = color;
+		this.shape = shape;
+		this.describe = function(){
+			return "A " + this.name + " is the color " + this.color +
+			 " and shape is " + this.shape; 
+		}
+	}
+
+	var melon = new Fruit('melon','red','round');
+
+	var users = [
+	new Fruit('apple','green','round'),
+	new Fruit('pinapple','yellow','oval')
+	];
+
+	console.log(users[1].describe());
+
+	//object literal
+	var obj = {
+		name: 'bob',
+		age: 34,
+		describe:function(){
+			return this.name + " " + this.age;
+		}
+	}
+	//object constructor, singleton
+	var obj2 = new Object;
+	obj2.name ="bob"; //etc
+
+	console.log(obj.describe());
+
+	//event handling
+	function showDate(){
+		var time = document.getElementById('time');
+		time.innerHTML = Date();
+
+	}
+
+	function clearDate(){
+		var time = document.getElementById('time');
+		time.innerHTML = '';
+	}
+
+	function changeBackground(x){
+		var body = document.getElementById('heading');
+		body.style.color = x.value;
+	}
+
+	//if this returns onsubmit to false then form doesnt go through validation.
+	function validateForm(){
+		var firstName = document.forms["myForm"]["firstName"].value;
+		var lastName = document.forms["myForm"]["lastName"].value;
+
+		if(firstName == null || firstName == ""){
+			alert("First name is required");
+			return false;
+		}else if(lastName == null || lastName == ""){
+			alert("Last name is required");
+			return false;
+		}
+		
+		return true;
+
+	}
+
+</script>
+
+</body>
+</html>
