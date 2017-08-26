@@ -1,0 +1,57 @@
+body{
+	font-size:17px;
+	font-family:Arial;
+	background:#f4f4f4;
+	line-height: 1.5em;
+}
+
+header{
+	background:#333;
+	color:white;
+	padding:20px;
+	text-align:center;
+	border-bottom: 4px #000 solid;
+	margin-bottom:10px;
+
+}
+
+#container{
+	width:90%;
+	margin:auto;
+	padding:10px;
+}
+
+form{
+	padding:20px;
+	background-color:grey;
+	color:white;
+	width:30%;
+}
+
+#img{
+	width:25px;
+	position:relative;
+	top:10px;
+	left:10px;
+}
+
+.testclass{
+	background:black;
+	color:white;
+}
+
+#box{
+	background:#333;
+	color:white;
+	width:500px;
+	height:90px;
+	padding:40px;
+	text-align:center;
+}
+
+#box2{
+	background:red;
+	width:100px;
+	height:100px;
+	position:relative;
+}

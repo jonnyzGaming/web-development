@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Jquery Crash Course</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js
+">	</script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+
+</head>
+<body>
+	<header>
+		<h1>JQuery Crash Course</h1>
+	</header>
+	<div id="container">
+		<h1 id="heading1">Heading One</h1>
+		<p id="para1">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute <span>irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu</span> fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+
+		<h1 class="heading2">Heading Two</h1>
+		<p class="para2">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute <span>irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu</span> fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+
+		<div id="mydiv"></div>
+
+		<ul id=list1>
+			<li>List item 1</li>
+			<li>List item 2</li>
+		</ul>
+
+		<a href="http://google.com" id="googlel">Google</a>
+		<a href="http://yahoo.com">Yahoo</a>
+
+		<br>
+
+		<button id="btn1">Hide</button>
+		<button id="btn2">Toogle CSS</button>
+		<br>
+		<br>
+		<label>Add New List Item:</label>
+		<input type="text" id="newitem">
+
+		<ul id="users"></ul>
+
+		<h1 id="coords"></h1>
+
+		<form id="form">
+			<label>First Name</label><br>
+			<input type="text" name="fname" id="fname"><br>
+			<label>Last Name</label><br>
+			<input type="text" name="lname" id="lname"><br>
+			<label>Gender</label><br>
+			<select id="gender" name="gender">
+				<option value="male">Male</option>
+				<option value="female">Female</option>
+			</select>
+			<img id="img" src="male.png">
+			<br>
+			<input type="submit" value="Submit">
+		</form>
+
+		<hr>
+
+		<button id="btnFadeOut">Fade Out</button>
+		<button id="btnFadeIn">Fade In</button>
+		<button id="btnFadeTog">Fade Toggle</button>
+
+		<hr>
+
+		<button id="btnSlideUp">Slide Up</button>
+		<button id="btnSlideDown">Slide Down</button>
+		<button id="btnSlideTog">Slide Toggle</button>
+		<button id="btnstop">Stop</button>
+
+		<hr>
+
+		<div id="box">Hello World</div>
+
+		<hr>
+
+		<button id="moveLeft">Move Left</button>
+		<button id="moveRight">Move Right</button>
+		<button id="moveAround">Move Around</button>
+
+		<div id="box2"></div>
+
+
+
+	</div>
+
+	<script>
+		//SELECTORS
+		//$("h1").hide();  //class
+		//$("h1#heading1").hide();  //id
+		//$(".heading2").hide();    //custom class
+		//$("p span").css("color","red");  //class within a class
+		//$("ul#list li:first").css("color","red");  //pseudoclass/states
+		//$("ul#list li:even").css("background-color","yellow");
+		//$("ul#list li:nth-child(3n)").css("list-style","none");
+		//$(":button").hide();  //type
+		//$("[href]").css("color", "red");
+		//$('a[href="http://google.com"]').css("color","green");
+
+		//when document is fully loaded(so we have access to all elements)
+		$(document).ready(function(){
+
+			//basic click button, get usefull info in console
+			$("#btn1").click(function(e){
+				//modify selected elements
+				$("#para1").toggle();
+				$(".para2").toggle();
+
+				//access/modify all the elements values etc with the event var
+				//console.log(e);
+				//console.log(e.currentTarget.id);
+				//console.log(e.currentTarget.innerHTML);
+				//console.log(e.currentTarget.outerHTML);
+				//console.log(e.currentTarget.className);
+
+
+			});
+
+			//mouse mover
+			$(document).on("mousemove",function(e){
+
+				$("#coords").html("Coords: X: " + e.clientX 
+					+ " Y: " + e.clientY);
+
+			});
+
+			//focus(for all input elements)
+			$("input").focus(function(){
+				$(this).css('background','pink');
+			});
+
+			//un focus - blur (for all input elements)
+			$("input").blur(function(){
+				$(this).css('background','white');
+			});
+
+			//when a key press if finnished(you pull up)
+			$("input").keyup(function(e){
+				//console.log(this.value); //works
+				//console.log(e.target.value);
+			});
+			
+			//change in an element
+			$("select#gender").change(function(e){
+
+				if(e.target.value == "male"){
+					$("#img").attr('src','male.png');
+				}else if(e.target.value == "female"){
+					$("#img").attr('src','female.png');
+				}
+			});
+
+			//form submit
+			$("#form").submit(function(e){
+				//stops us from submitting right away.
+				e.preventDefault();
+
+				//do validation etc before submitting.
+				var name = $("input#fname").val();
+				console.log(name);
+			});
+
+			//DOM manipulation more
+			//css stuff
+			$("p#para1").css({color:'red' , background:'#ccc'});
+			$("p.para2").addClass('testclass');
+			$("p.para2").removeClass('testclass');
+			$("#btn2").click(function(e){
+				$("p.para2").toggleClass('testclass');
+			});
+
+			//adding changing to DOM
+			//$("#mydiv").text('hello world');
+			//$("#mydiv").html('<h3>Hello world</h3>');
+			//$("ul").append('<li> Append List Item</li>');
+			//$("ul").prepend('<li> prepend List Item</li>');
+			//$("ul").before('<h4> Hi</h4>');
+			//$("ul").after('<h4> Bye</h4>');
+
+			//$('ul').empty();  //remove all inside
+			//$('ul').detach(); //removes html
+
+			//attributes very usefull
+			//$('a#googlel').attr('target', '_blank');
+
+			//$('p').wrapAll('<h1>');
+			//$('p').wrap('<h1>');
+
+			//add a new item to a list
+			$('#newitem').keyup(function(e){
+				//get the key pressed code
+				var code = e.which;
+				//enter is code 13
+				if(code == 13){
+					e.preventDefault();
+					$('ul').append('<li>'+e.target.value + '</li>');
+				}
+			});
+
+			//put data from an array into a list.
+			var myArr = ['bob', 'jeff', 'sally' ,'ken'];
+			$.each(myArr,function(i,val){
+				$('#users').append('<li>' + val + '</li>');
+
+			});
+
+			//put data from list into an array
+			var newArr = $('ul#list1 li').toArray();
+			console.log(newArr);
+
+			//animations/effects
+			$('#btnFadeOut').click(function(){
+				$('#box').fadeOut(3000,function(){
+
+					$('#btnFadeOut').text('Its Gone');
+				});
+			});
+			$('#btnFadeIn').click(function(){
+				$('#box').fadeIn(3000,function(){
+
+					$('#btnFadeOut').text('Fade Out');
+				});
+			});
+			$('#btnFadeTog').click(function(){
+				$('#box').fadeToggle(1000);
+			});
+			$('#btnSlideUp').click(function(){
+				$('#box').slideUp(3000);
+
+			});
+			$('#btnSlideDown').click(function(){
+				$('#box').slideDown(3000);
+
+			});
+			$('#btnSlideTog').click(function(){
+				$('#box').slideToggle(3000);
+
+			});
+
+			$('#btnstop').click(function(){
+				$('#box').stop();
+
+			});
+
+			$('#moveRight').click(function(){
+				$('#box2').animate({
+					left:500,
+					height:'300px',
+					width:'300px',
+					opacity:'0.5'
+				});
+
+			});
+			$('#moveLeft').click(function(){
+				$('#box2').animate({
+					left:0,
+					height:'100px',
+					width:'100px',
+					opacity:'1'
+				});
+
+			});
+
+			$('#moveAround').click(function(){
+				var box = $('#box2');
+				box.animate({
+					left:300
+				});
+
+				box.animate({
+					top:300
+				});
+				box.animate({
+					left:0,
+					top:300
+				});
+				box.animate({
+					left:0,
+					top:0
+				});
+			});
+
+		});
+
+
+	</script>
+</body>
+
+</html>
