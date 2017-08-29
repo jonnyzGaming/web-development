@@ -96,6 +96,26 @@
 
 		<div id="box2"></div>
 
+		<hr>
+		<h3>AJAX Content</h3>
+		<hr>
+		<ul id="users"></ul>
+		<div id="result">
+			
+		</div>
+
+		<hr>
+		<h3>Add Post</h3>
+		<form id="postForm" action="https://jsonplaceholder.typicode.com/posts">
+			<input type="text" id="title" placeholder="title">
+			<br>
+			<textarea placeholder="Body" id="body"></textarea>
+			<br>
+			<input type="submit" value="Submit">
+		</form>
+
+
+
 
 
 	</div>
@@ -110,8 +130,8 @@
 		//$("ul#list li:even").css("background-color","yellow");
 		//$("ul#list li:nth-child(3n)").css("list-style","none");
 		//$(":button").hide();  //type
-		//$("[href]").css("color", "red");
-		//$('a[href="http://google.com"]').css("color","green");
+		//$("[href]").css("color", "red"); //attribute
+		//$('a[href="http://google.com"]').css("color","green"); //specific atrr
 
 		//when document is fully loaded(so we have access to all elements)
 		$(document).ready(function(){
@@ -295,6 +315,67 @@
 					top:0
 				});
 			});
+
+			//AJAX with JQuery
+			//LOAD (with optional callback func)
+			$('#result').load('test.html', function(
+				responseTxt, statusTxt, xhr){
+				if(statusTxt == 'success'){
+					console.log('went fine');
+				}else if(statusTxt = "error"){
+					console.log("Error: " + xhr.statusText);
+				}
+			});
+
+			//GET
+			$.get('test.html',function(data){
+
+				$('#result').html(data);
+			});
+
+			$.getJSON('users.json', function(data){
+
+				$.each(data, function(i, user){
+					$('ul#users').append('<li>' + user.firstName + '</li>');
+				});
+			});
+			/*
+			//AJAX
+			$.ajax({
+				method:'GET',
+				url: 'https://jsonplaceholder.typicode.com/posts',
+				dataType: 'json',
+			}).done(function(data){
+				console.log(data);
+
+				$.map(data, function(post,i){
+					$('#result').append('<h3>' + post.title+ '</h3>' +
+						'<p>' + post.body + '</p>');
+				});
+			});
+			*/
+			
+			//POST WITH FORM
+			$('#postForm').submit(function(e){
+				e.preventDefault();
+
+				var title = $('#title').val();
+				var body = $('#body').val();
+				var url = $(this).attr('action'); //gets the json url
+
+				//posting the form data to the url json file.
+				//parameters url:data to get
+				//          data:To send along with request tos erver
+				//  opt callback:executes on complete
+				$.post(url, {title:title,body:body},function(data){
+					console.log('Post SAVED');
+					console.log(data);
+				});
+			});
+
+
+
+
 
 		});
 
