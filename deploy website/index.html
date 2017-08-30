@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width"> <!-- for responsive -->
+    <meta name="description" content="A website layout for reference">
+	  <meta name="keywords" content="web design, pro web design, professional web design">
+  	<meta name="author" content="billy bob">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+  	</script>
+  	<script type="text/javascript" src="javascripts/jquery.hotkeys.js"></script>
+  	<script type="text/javascript" src="javascripts/key_status.js"></script>
+
+	<title>Responsive website | Home</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+<header>
+	<div class="container">
+		<div id="branding">
+			<h1><span class="highlight">Amazing</span> web design</h1>
+		</div>
+
+		<nav>
+			<ul>
+				<li class="current"><a href="index.html">HOME</a></li>
+				<li><a href="about.html">ABOUT</a></li>
+				<li><a href="services.html">SERVICES</a></li>
+			</ul>
+		</nav>
+
+	</div>
+</header>
+
+<section id="showcase">
+	<div class="container">
+		<h1>Amazing Professional Website Design</h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+	</div>
+
+</section>
+
+<section id="newsletter">
+	<div class="container">
+		<h1>Subscribe to our newsletter</h1>
+		<form id="newletterform">
+			<input type="email" id='email' placeholder="Enter Email...">
+			<button type="submit" class="button1">Subscribe</button>
+		</form>
+	</div>
+</section>
+
+<!--snake game -->
+<div class="container">
+	<canvas id="gameCanvas" width="800px" height="600px">
+		
+	</canvas>
+</div>
+
+
+
+<section id="boxes">
+	<div class="container">
+		<div class="box">
+			<img src="./img/logo_html.png">
+			<h3>HTML5 Markup</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			</p>
+		</div>
+		<div class="box">
+			<img src="./img/logo_css.png">
+			<h3>CSS Styling</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			</p>
+		</div>
+		<div class="box">
+		<img src="./img/logo_brush.png">
+			<h3>Graphic Design</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			</p>
+		</div>
+
+	</div>
+</section>
+
+<footer>
+	<p>Amazing Web Design, Copyright &copy; 2017</p>
+</footer>
+
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+
+		//submit newsletter
+		$('#newletterform').submit(function(e){
+			e.preventDefault();
+			
+			var email = $('#email').val();
+			console.log(email);
+
+		});
+
+		//snakegame
+		//canvas properties
+		var CANVAS_WIDTH = $('#gameCanvas').width();
+		var CANVAS_HEIGHT = $('#gameCanvas').height()
+		var canvas = $('#gameCanvas').get(0).getContext("2d");
+
+
+		//game loop
+		var FPS = 30;
+		setInterval(function(){
+			update();
+			draw();
+
+		}, 1000/FPS);
+
+		//player object
+		var player = {
+			color: '#00A',
+			dx:0,
+			dy:0,
+			width:8,
+			height:8,
+			//score:0,
+			speed:5,
+			draw: function(){
+				canvas.fillStyle = this.color;
+				canvas.fillRect(this.x,this.y,this.width,this.height);
+				canvas.font = "30px Arial";
+				//canvas.fillStyle = '#fff';
+				//canvas.fillText("Score: " + this.score, 650,50);
+			},
+			update: function(){
+				//key input
+				if(keydown.left){
+					player.dx = -player.speed;
+					player.dy = 0;
+				}
+				else if(keydown.right){
+					player.dx = player.speed;
+					player.dy = 0;
+				}
+				else if(keydown.up){
+					player.dy = -player.speed;
+					player.dx = 0;
+				}
+				else if(keydown.down){
+					player.dy = player.speed;
+					player.dx = 0;
+				}
+
+				//border
+				if(player.x > CANVAS_WIDTH)
+					player.x = 0;
+				if(player.x < 0)
+					player.x = CANVAS_WIDTH;
+				if(player.y < 0)
+					player.y = CANVAS_HEIGHT;
+				if(player.y > CANVAS_HEIGHT)
+					player.y = 0;
+
+				player.x = player.x + player.dx;
+				player.y = player.y + player.dy;
+			}
+		};
+
+		function init(){
+			player.dx = 0;
+			player.dy = 0;
+			player.x = 0;
+			player.y = 0;
+			//player.score = 0;
+		}
+
+		init();
+
+		enemies = [];
+		function enemy(I){
+			I = I || {};
+
+			I.active = true;
+			I.age = Math.floor(Math.random() * 128);
+
+			I.color = '#'+Math.random().toString(16).substr(-6);
+
+			I.x = CANVAS_WIDTH * Math.random();
+			I.y = CANVAS_HEIGHT * Math.random();
+			I.dx= Math.random() * 4 - 2;
+			I.dy = Math.random() * 4 - 2;
+
+			I.width = 32;
+			I.height = 32;
+
+			I.inBounds = function(){
+				return I.x >= 0 && I.x <= CANVAS_WIDTH &&
+     			I.y >= 0 && I.y <= CANVAS_HEIGHT;
+			};
+
+			I.draw = function() {
+			    canvas.fillStyle = this.color;
+			    canvas.fillRect(this.x, this.y, this.width, this.height);
+		  	};
+
+		  	I.update = function() {
+			    I.x += I.dx;
+			    I.y += I.dy;
+
+			   	I.dx = 3 * Math.sin(I.age * Math.PI / 64);
+
+			    I.age++;
+
+			    I.active = I.active && I.inBounds();
+		 	 };
+
+		  	return I;
+		};
+
+
+
+
+		//draw loop
+		function draw(){
+			canvas.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+			player.draw();
+
+			enemies.forEach(function(enemy){
+				enemy.draw();
+			});
+		}
+
+		//update loop
+		function update(){
+
+			player.update();
+
+			//enemies
+			enemies.forEach(function(enemy){
+				enemy.update();
+			});
+
+			enemies = enemies.filter(function(enemy) {
+			    return enemy.active;
+			});
+
+			if(Math.random() < 0.1) {
+			  enemies.push(enemy());
+			}
+			
+		}
+
+		
+
+	});
+
+	
+
+</script>
+
+</body>
+</html>

@@ -134,6 +134,7 @@
 		//$('a[href="http://google.com"]').css("color","green"); //specific atrr
 
 		//when document is fully loaded(so we have access to all elements)
+		//or $(function(){}) does the same!!!!
 		$(document).ready(function(){
 
 			//basic click button, get usefull info in console
@@ -341,6 +342,7 @@
 			});
 			/*
 			//AJAX
+			//default method is GET
 			$.ajax({
 				method:'GET',
 				url: 'https://jsonplaceholder.typicode.com/posts',
