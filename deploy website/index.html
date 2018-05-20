@@ -57,6 +57,12 @@
 	</div>
 </section>
 
+<!-- Categories test -->
+<section id="categories">
+  
+</section>
+
+<br/>
 <!--snake game -->
 <div class="container">
 	<canvas id="gameCanvas" width="800px" height="600px">
@@ -103,6 +109,67 @@
 <script type="text/javascript">
 	
 	$(document).ready(function(){
+    
+    //Add all the basic categorys and posts elements with css classes.
+    var categories_list = ['cat','dog','cow', 'fish'];
+    var posts = ['cat post 1', 'dog post 1', 'cow post 1', 'fish post 1', 'cat post 2']; 
+    $.each(categories_list, function(i,category){
+
+      //create root div for each categories, and fill in list items from the blog posts.
+      var category_div = $('<div id="' + category + '">'+ category +'</div>').appendTo('#categories');
+      category_div.addClass('category_box');
+      
+      var posts_list = $('<ul id="' + category+ '_categories_list">').appendTo('#categories');
+      $.each(posts, function(i,post){
+     
+        //if the post contains the category, add it to the list!
+        if (post.includes(category)){
+          
+          var li = $('<li id="' + post + '"><a href="' + post + '"/a>'+ post + '</li>').appendTo(posts_list);
+          //add all the posts for the category, link to the posts url page.
+          li.addClass('category_post');
+        }
+        
+      });
+      
+      $('#categories_list').append('</ul>');
+      posts_list.hide();
+      
+      //onclick category functionality
+      category_div.click(function(){
+        
+        //unselect the currently selected
+        $.each(categories_list, function(i,category){
+          current_category = $('#'+category);
+          if (current_category.hasClass('category_box_selected'))
+          {
+            current_category.removeClass('category_box_selected');
+            
+          }
+          
+        });
+        
+        //now select the current and pull down its posts
+        
+        //select the category and unhide the posts.
+        category_div.addClass('category_box_selected');
+        posts_list.slideToggle(250)
+        
+        
+      });
+      
+    });
+    
+   
+    
+   
+    
+    
+    
+    
+    
+    
+    $('#categories')
 
 		//submit newsletter
 		$('#newletterform').submit(function(e){

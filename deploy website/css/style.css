@@ -8,6 +8,28 @@ body{
 	background-color:#f4f4f4;
 }
 
+#categories{
+background-color:#5F8E9E;
+width:25%;
+text-align:center;
+}
+
+.category_box{
+  background-color:#567782;
+  
+}
+.category_box:hover{
+  background-color:#7DA9B8;
+}
+
+.category_box_selected{
+ background-color:#7DA9B8;
+}
+
+.category_post{
+background-color:#48CEFA;
+}
+
 /*Global*/
 .container{
 	width:80%;
